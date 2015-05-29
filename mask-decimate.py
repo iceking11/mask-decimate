@@ -8,7 +8,7 @@ bl_info = {
     "warning": "",
     "wiki_url": "",
     "tracker_url": "",
-    "category": "Decimation"}
+    "category": "Mask Tools"}
 
 import bpy
 import math
@@ -88,7 +88,7 @@ class MaskDecimationPanel(bpy.types.Panel):
     bl_idname = "OBJECT_PT_maskdecimate"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
-    bl_category = 'Decimation'
+    bl_category = 'Mask Tools'
 
     def draw(self, context):
         layout = self.layout
