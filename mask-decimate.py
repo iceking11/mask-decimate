@@ -89,6 +89,7 @@ class MaskDecimate(bpy.types.Operator):
         md = bpy.context.active_object.modifiers.new(modnam, 'DECIMATE')
         md.vertex_group = vname
         md.ratio = wm.maskdecimate_str
+        md.vertex_group_factor = wm.maskdecimate_fac
 
         #apply modifier and remove vgroup
         if wm.maskdecimate_apply == True:
@@ -117,15 +118,18 @@ class MaskDecimationPanel(bpy.types.Panel):
         row_sw = layout.row(align=True)
         row_sw.alignment = 'EXPAND'
         row_sw.operator("mask.decimate", "Mask Decimate")
-        row_sw = layout.row(align=False)
-        row_sw.prop(wm, "maskdecimate_str", "Decimation Strength")
+        row_sw = layout.row(align=True)
+        row_sw.prop(wm, "maskdecimate_str", "Str")
+        #row_sw = layout.row(align=False)
+        row_sw.prop(wm, "maskdecimate_fac", "Fac")        
         row_sw = layout.row(align=False)
         row_sw.prop(wm, "maskdecimate_apply", "Apply Decimate")          
        
 def register():
     bpy.utils.register_module(__name__)
     
-    bpy.types.WindowManager.maskdecimate_str = FloatProperty(min = 0, max = 1, step = 0.1, precision = 3, default = 0.95)
+    bpy.types.WindowManager.maskdecimate_str = FloatProperty(min = 0, max = 1, step = 0.1, precision = 3, default = 1)
+    bpy.types.WindowManager.maskdecimate_fac = FloatProperty(min = 0, max = 1, step = 0.1, precision = 3, default = 1)    
     bpy.types.WindowManager.mask_detect = BoolProperty(default=False)
     bpy.types.WindowManager.maskdecimate_apply = BoolProperty(default=True)    
   
@@ -134,18 +138,3 @@ def unregister():
     
 if __name__ == "__main__":
     register()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
